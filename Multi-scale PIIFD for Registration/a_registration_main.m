@@ -1,6 +1,6 @@
 clear; close all; clc;
-if isempty(gcp('nocreate')) %如果之前没有开启parpool则启动
-    parpool(maxNumCompThreads);  %设为最大可使用核数
+if isempty(gcp('nocreate'))
+    parpool(maxNumCompThreads);
 end
 %% Make fileholder for save images
 if (exist('save_image','dir')==0) % 如果文件夹不存在
@@ -13,7 +13,7 @@ G_sigma = 1.6;  % 高斯金字塔的模糊单元，默认:1.6
 numLayers = 4;  % 高斯金字塔每组层数，默认:4
 sigma = 20;     % Harris 局部加权高斯核标准差上限
 thresh = 50;    % Harris 角点响应判别阈值
-radius = 5;     % Harris 局部非极大值抑制窗半径
+radius = 15;    % Harris 局部非极大值抑制窗半径
 N = 1000;       % 特征点数量择优阈值
 trans_form = 'similarity';  % 变换模型：'similarity','affine','perspecive'
 
@@ -49,7 +49,6 @@ descriptors_2 = Get_Multiscale_PIIFD(I2,p2,numOctaves_2,numLayers,G_resize,sig);
 
 %% Matching and Transforming
 [location1,location2] = Match_Keypoint(I1,I2,descriptors_1,descriptors_2,numOctaves_1,numOctaves_2,numLayers,0);
-% figure; matchment = showMatchedFeatures(I1_o,I2_o,location1(:,1:2)/resample1,location2(:,1:2)/resample2,'montage');
 matchment = Showmatch(I1_o,I2_o,location1/resample1,location2/resample2);
 [H,rmse,cor2,cor1] = FSC(location2/resample2,location1/resample1,trans_form,2);
 % matchment1 = Showmatch(I1_o,I2_o,cor1,cor2);
