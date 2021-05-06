@@ -60,7 +60,7 @@ figure; imshow(I3,[]); title('Fusion Form');
 figure; imshow(I4,[]); title('Checkerboard Form');
 
 %% Save images
-Date = datestr(now,'yyyy-mm-dd_HH-MM-SS__');
+Date = datestr(now,'yyyy-mm-dd_HH-MM-SS__'); tic
 str=['.\save_image\',Date,'1 Matching Result','.jpg']; saveas(matchment,str);
 str=['.\save_image\',Date,'2 Reference Image','.jpg']; imwrite(I1_c,str);
 str=['.\save_image\',Date,'3 Transformed Image','.jpg']; imwrite(I2_c,str);
