@@ -1,80 +1,51 @@
 clear; close all; clc;
-if isempty(gcp('nocreate')) %Èç¹ûÖ®Ç°Ã»ÓĞ¿ªÆôparpoolÔòÆô¶¯
-    parpool(maxNumCompThreads);  %ÉèÎª×î´ó¿ÉÊ¹ÓÃºËÊı
+if isempty(gcp('nocreate')) %å¦‚æœä¹‹å‰æ²¡æœ‰å¼€å¯parpoolåˆ™å¯åŠ¨
+    parpool(maxNumCompThreads);  %è®¾ä¸ºæœ€å¤§å¯ä½¿ç”¨æ ¸æ•°
 end
 %% Make fileholder for save images
-if (exist('save_image','dir')==0) % Èç¹ûÎÄ¼ş¼Ğ²»´æÔÚ
+if (exist('save_image','dir')==0) % å¦‚æœæ–‡ä»¶å¤¹ä¸å­˜åœ¨
     mkdir('save_image');
 end
 
 %% Define the constants
-G_resize = 3;   % ¸ßË¹½ğ×ÖËşµÄ½µ²ÉÑùµ¥Ôª£¬Ä¬ÈÏ:2
-G_sigma = 1.6;  % ¸ßË¹½ğ×ÖËşµÄÄ£ºıµ¥Ôª£¬Ä¬ÈÏ:1.6
-numLayers = 6;  % ¸ßË¹½ğ×ÖËşÃ¿×é²ãÊı£¬Ä¬ÈÏ:4
-sigma = 20;     % Harris ¾Ö²¿¼ÓÈ¨¸ßË¹ºË±ê×¼²îÉÏÏŞ
-thresh = 50;    % Harris ½ÇµãÏìÓ¦ÅĞ±ğãĞÖµ
-radius = 5;     % Harris ¾Ö²¿·Ç¼«´óÖµÒÖÖÆ´°°ë¾¶
-N = 1000;       % ÌØÕ÷µãÊıÁ¿ÔñÓÅãĞÖµ
-trans_form = 'similarity';  % ±ä»»Ä£ĞÍ£º'similarity','affine','perspecive'
+G_resize = 3;   % é«˜æ–¯é‡‘å­—å¡”çš„é™é‡‡æ ·å•å…ƒï¼Œé»˜è®¤:2
+G_sigma = 1.6;  % é«˜æ–¯é‡‘å­—å¡”çš„æ¨¡ç³Šå•å…ƒï¼Œé»˜è®¤:1.6
+numLayers = 4;  % é«˜æ–¯é‡‘å­—å¡”æ¯ç»„å±‚æ•°ï¼Œé»˜è®¤:4
+sigma = 20;     % Harris å±€éƒ¨åŠ æƒé«˜æ–¯æ ¸æ ‡å‡†å·®ä¸Šé™
+thresh = 50;    % Harris è§’ç‚¹å“åº”åˆ¤åˆ«é˜ˆå€¼
+radius = 5;     % Harris å±€éƒ¨éæå¤§å€¼æŠ‘åˆ¶çª—åŠå¾„
+N = 1000;       % ç‰¹å¾ç‚¹æ•°é‡æ‹©ä¼˜é˜ˆå€¼
+trans_form = 'similarity';  % å˜æ¢æ¨¡å‹ï¼š'similarity','affine','perspecive'
 
 %% Read images
 [image_1, image_2] = Readimage;
-% figure; subplot(121),imshow(I1_o,[]); subplot(122),imshow(I2_o,[]);
-% image_1=imresize(image_1,1/3,'bilinear');
+% image_1=imresize(image_1,3,'bilinear');
 
 %% Image preproscessing
 resample1 = 1; resample2 = 1;
-[I1_o,I1] = Preproscessing(image_1,resample1);  % I1:²Î¿¼Í¼Ïñ
-[I2_o,I2] = Preproscessing(image_2,resample2);  % I2:´ıÅä×¼Í¼Ïñ
+[I1_o,I1] = Preproscessing(image_1,resample1);  % I1:å‚è€ƒå›¾åƒ
+[I2_o,I2] = Preproscessing(image_2,resample2);  % I2:å¾…é…å‡†å›¾åƒ
 % figure; subplot(121),imshow(I1,[]); subplot(122),imshow(I2,[]);
 
-%% Save the reference image and the image to be registered
-% str=['.\save_image\','Reference image.jpg'];
-% imwrite(I1,str,'jpg');
-% str=['.\save_image\','Image to be registered.jpg'];
-% imwrite(I2,str,'jpg');
-
 %% The number of groups in Gauss Pyramid
-% numOctaves_1 = max(floor(log2(min(size(I1,1),size(I1,2)))-5),1);  % 2^(7+1)=256£¬Í¼Ïñ×îĞ¡µ½256
-% numOctaves_2 = max(floor(log2(min(size(I2,1),size(I2,2)))-5),1);  % 2^(7+1)=256£¬Í¼Ïñ×îĞ¡µ½256
 numOctaves_1 = 3;
 numOctaves_2 = 3;
 sig = Get_Gaussian_Scale(G_sigma,numLayers);
 ratio = sqrt(size(I1,1)*size(I1,2)/(size(I2,1)*size(I2,2)));
-% ratio = 1;
 
-fprintf('\n¿ªÊ¼Í¼ÏñÅä×¼£¬ÇëÄÍĞÄµÈ´ı\n\n'); tic
+fprintf('\nå¼€å§‹å›¾åƒé…å‡†ï¼Œè¯·è€å¿ƒç­‰å¾…\n\n'); tic
 
 %% Harris Corner Detection
-% s = 4; o = 6;
-% [II1,~,~,~,~,~,~] = phasecong3(I1,s,o,3,'mult',1.6,'sigmaOnf',0.75,'g', 3, 'k',1);
-% a=max(II1(:)); b=min(II1(:)); II1=(II1-b)/(a-b);
-% [II2,~,~,~,~,~,~] = phasecong3(I2,s,o,3,'mult',1.6,'sigmaOnf',0.75,'g', 3, 'k',1);
-% a=max(II2(:)); b=min(II2(:)); II2=(II2-b)/(a-b);
 p1 = Detect_Harris_Conner(I1,sigma,thresh,floor(radius*ratio),N,numOctaves_1,G_resize,1);
-    str = ['ÒÑÍê³É²Î¿¼Í¼ÏñÌØÕ÷µã¼ì²â£¬ÓÃÊ±',num2str(toc),'s\n']; fprintf(str); tic
+    str = ['å·²å®Œæˆå‚è€ƒå›¾åƒç‰¹å¾ç‚¹æ£€æµ‹ï¼Œç”¨æ—¶',num2str(toc),'s\n']; fprintf(str); tic
 p2 = Detect_Harris_Conner(I2,sigma,thresh,radius,N,numOctaves_2,G_resize,1);
-    str = ['ÒÑÍê³É´ıÅä×¼Í¼ÏñÌØÕ÷µã¼ì²â£¬ÓÃÊ±',num2str(toc),'s\n\n']; fprintf(str); tic
-
-%% PC-Harris Feature Detection
-% scale = 4; orientation = 6;
-% p1 = Detect_PC_Harris(I1,scale,orientation,N,numOctaves_1,1);
-%     str = ['ÒÑÍê³É²Î¿¼Í¼ÏñÌØÕ÷µã¼ì²â£¬ÓÃÊ±',num2str(toc),'s\n']; fprintf(str); tic
-% p2 = Detect_PC_Harris(I2,scale,orientation,N,numOctaves_1,1);
-%     str = ['ÒÑÍê³É´ıÅä×¼Í¼ÏñÌØÕ÷µã¼ì²â£¬ÓÃÊ±',num2str(toc),'s\n\n']; fprintf(str); tic
-
-%% PC-FAST Feature Detection
-% scale = 4; orientation = 6;
-% p1 = Detect_PC_FAST(I1,scale,orientation,N,1);
-%     str = ['ÒÑÍê³É²Î¿¼Í¼ÏñÌØÕ÷µã¼ì²â£¬ÓÃÊ±',num2str(toc),'s\n']; fprintf(str); tic
-% p2 = Detect_PC_FAST(I2,scale,orientation,N,1);
-%     str = ['ÒÑÍê³É´ıÅä×¼Í¼ÏñÌØÕ÷µã¼ì²â£¬ÓÃÊ±',num2str(toc),'s\n\n']; fprintf(str); tic
+    str = ['å·²å®Œæˆå¾…é…å‡†å›¾åƒç‰¹å¾ç‚¹æ£€æµ‹ï¼Œç”¨æ—¶',num2str(toc),'s\n\n']; fprintf(str); tic
 
 %% Create PIIFD Descriptor
 descriptors_1 = Get_Multiscale_PIIFD(I1,p1,numOctaves_1,numLayers,G_resize,sig);
-    str = ['ÒÑÍê³É²Î¿¼Í¼ÏñÃèÊö·û½¨Á¢£¬ÓÃÊ±',num2str(toc),'s\n']; fprintf(str); tic
+    str = ['å·²å®Œæˆå‚è€ƒå›¾åƒæè¿°ç¬¦å»ºç«‹ï¼Œç”¨æ—¶',num2str(toc),'s\n']; fprintf(str); tic
 descriptors_2 = Get_Multiscale_PIIFD(I2,p2,numOctaves_2,numLayers,G_resize,sig);
-    str = ['ÒÑÍê³É´ıÅä×¼Í¼ÏñÃèÊö·û½¨Á¢£¬ÓÃÊ±',num2str(toc),'s\n\n']; fprintf(str); tic
+    str = ['å·²å®Œæˆå¾…é…å‡†å›¾åƒæè¿°ç¬¦å»ºç«‹ï¼Œç”¨æ—¶',num2str(toc),'s\n\n']; fprintf(str); tic
 
 %% Matching and Transforming
 [location1,location2] = Match_Keypoint(I1,I2,descriptors_1,descriptors_2,numOctaves_1,numOctaves_2,numLayers,0);
@@ -83,11 +54,8 @@ matchment = Showmatch(I1_o,I2_o,location1/resample1,location2/resample2);
 [H,rmse,cor2,cor1] = FSC(location2/resample2,location1/resample1,trans_form,2);
 % matchment1 = Showmatch(I1_o,I2_o,cor1,cor2);
 [I1_c,I2_c,I3,I4] = Transformation(I1_o,I2_o,double(H));
-    str = ['ÒÑÍê³ÉÍ¼Ïñ±ä»»£¬ÓÃÊ±',num2str(toc),'s\n\n']; fprintf(str); tic
+    str = ['å·²å®Œæˆå›¾åƒå˜æ¢ï¼Œç”¨æ—¶',num2str(toc),'s\n\n']; fprintf(str); tic
 
-%% Time and Result
-% t2 = toc;
-% fprintf('Runtime = %6.2f seconds.\n\n',t);
 figure; imshow(I3,[]); title('Fusion Form');
 figure; imshow(I4,[]); title('Checkerboard Form');
 
@@ -98,5 +66,5 @@ str=['.\save_image\',Date,'2 Reference Image','.jpg']; imwrite(I1_c,str);
 str=['.\save_image\',Date,'3 Transformed Image','.jpg']; imwrite(I2_c,str);
 str=['.\save_image\',Date,'4 Fusion of results','.jpg']; imwrite(I3,str);
 str=['.\save_image\',Date,'5 Checkerboard of results','.jpg']; imwrite(I4,str);
-str = ['Åä×¼½á¹ûÒÑ¾­±£´æÔÚ³ÌĞò¸ùÄ¿Â¼ÏÂµÄsave_imageÎÄ¼ş¼ĞÖĞ£¬\nÓÃÊ±',num2str(toc),'s\n']; fprintf(str);
+str = ['é…å‡†ç»“æœå·²ç»ä¿å­˜åœ¨ç¨‹åºæ ¹ç›®å½•ä¸‹çš„save_imageæ–‡ä»¶å¤¹ä¸­ï¼Œ\nç”¨æ—¶',num2str(toc),'s\n']; fprintf(str);
 % end
