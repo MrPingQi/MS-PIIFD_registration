@@ -54,7 +54,7 @@ matchment = Showmatch(I1_o,I2_o,location1/resample1,location2/resample2);
 [H,rmse,cor2,cor1] = FSC(location2/resample2,location1/resample1,trans_form,2);
 % matchment1 = Showmatch(I1_o,I2_o,cor1,cor2);
 [I1_c,I2_c,I3,I4] = Transformation(I1_o,I2_o,double(H));
-    str = ['已完成图像变换，用时',num2str(toc),'s\n\n']; fprintf(str); tic
+    str = ['已完成图像变换，用时',num2str(toc),'s\n\n']; fprintf(str);
 
 figure; imshow(I3,[]); title('Fusion Form');
 figure; imshow(I4,[]); title('Checkerboard Form');
