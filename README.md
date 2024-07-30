@@ -1,7 +1,7 @@
 # MS-PIIFD-registration
 Code for the paper “Multi-scale PIIFD for registration of multi-source remote sensing images.” [Online]. Available: http://journal.bit.edu.cn/jbit/en/article/doi/10.15918/j.jbit1004-0579.2021.016.
 
-If you have any queries or suggestions, please do not hesitate to contact me (gao-pingqi@qq.com or 3120205425@bit.edu.cn).
+If you have any queries or suggestions, please do not hesitate to contact me (gao-pingqi@qq.com).
 
 Run this code by the following procedures:
 
@@ -19,8 +19,11 @@ Testing data are available:
 
 Multi-source images registration examples:
 ![image](example1.jpg)
+
 ![image](example2.jpg)
+
 ![image](example3.jpg)
+
 ![image](example4.jpg)
 
 
