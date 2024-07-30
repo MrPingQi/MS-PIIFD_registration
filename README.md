@@ -20,6 +20,7 @@ Testing data are available:
 Multi-source images registration examples:
 ![image](example1.jpg)
 ![image](example2.jpg)
+![image](example3.jpg)
 
 
 ** Now this registration algorithm is an old-fashioned one, and we highly recommend checking our new method: MS-HLMO, which is now available at https://github.com/MrPingQi/MS_HLMO_registration.
