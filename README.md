@@ -19,6 +19,7 @@ Testing data are available:
 
 Multi-source images registration examples:
 ![image](example1.jpg)
+
 ![image](example2.jpg)
 
 
