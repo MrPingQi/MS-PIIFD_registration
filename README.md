@@ -17,6 +17,9 @@ Testing data are available:
 2. HSI: https://drive.google.com/file/d/1HZo96qHkWgJtsdWeyQXNqwYf0FUv86nH/view?usp=sharing
 
 
+** Now this registration algorithm is an old-fashioned one, and we highly recommend checking our new method: MS-HLMO, which is now available at https://github.com/MrPingQi/MS_HLMO_registration.
+
+
 Multi-source images registration examples:
 ![image](example1.jpg)
 
@@ -25,6 +28,3 @@ Multi-source images registration examples:
 ![image](example3.jpg)
 
 ![image](example4.jpg)
-
-
-** Now this registration algorithm is an old-fashioned one, and we highly recommend checking our new method: MS-HLMO, which is now available at https://github.com/MrPingQi/MS_HLMO_registration.
