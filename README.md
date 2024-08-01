@@ -1,5 +1,5 @@
 # MS-PIIFD_registration
-Code for the paper “Multi-scale PIIFD for registration of multi-source remote sensing images.” [Online]. Available: http://journal.bit.edu.cn/jbit/en/article/doi/10.15918/j.jbit1004-0579.2021.016.
+Code for the paper “Multi-scale PIIFD for registration of multi-source remote sensing images” [Online]. Available: http://journal.bit.edu.cn/jbit/en/article/doi/10.15918/j.jbit1004-0579.2021.016. and “Multi-Scale HARRIS-PIIFD Features for Registration of Visible and Infrared Images” [Online]. Available: https://ieeexplore.ieee.org/document/9555105.
 
 If you have any queries or suggestions, please do not hesitate to contact me (gao-pingqi@qq.com).
 
