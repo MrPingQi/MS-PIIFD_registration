@@ -25,7 +25,7 @@ Is_flag = 1;  % Visualization show
 I3_flag = 1;  % Overlap form
 I4_flag = 1;  % Mosaic form
 
-%% Define the constants
+%% Parameters
 G_resize = 2;    % 高斯金字塔降采样步长，默认:2;  Gaussian pyramid downsampling step, default: 2
 nOctaves_1 = 3;  % 高斯金字塔组数，默认:3;  Number of groups in the Gaussian pyramid, default: 3
 nOctaves_2 = 3;
