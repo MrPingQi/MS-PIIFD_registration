@@ -11,8 +11,8 @@ elseif(strcmp(change_form,'projective'))
     n=4;
     max_iteration=M*(M-1)*(M-2)/(2*3);
 end
-if(max_iteration>10000)
-    iterations=10000;
+if(max_iteration>800)
+    iterations=800;
 else
     iterations=max_iteration;%Algorithm iteration num
 end
