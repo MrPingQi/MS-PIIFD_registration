@@ -81,14 +81,14 @@ tic,descriptors_2 = Get_Multiscale_PIIFD(I2,keypoints_2,patchsize,NBS,NBO,...
     t(4)=toc; fprintf(['已完成待配准图像描述符建立，用时 ',num2str(t(4)),'s\n']);
               fprintf([' Done keypoints description of sensed image, time: ',num2str(t(4)),'s\n\n']);
 
-%% Keypoints Matching
+%% Keypoints matching
 tic,[cor1,cor2] = Multiscale_Matching(descriptors_1,descriptors_2,...
     nOctaves1,nOctaves2,nLayers,Error,K,scl_flag);
     t(5)=toc; fprintf(['已完成特征点匹配，用时 ',num2str(t(5)),'s\n']);
               fprintf([' Done keypoints matching, time: ',num2str(t(5)),'s\n\n']);
     matchment = Show_Matches(I1_s,I2_s,cor1/resample1,cor2/resample2,0);
 
-%% Image Transformation
+%% Image transformation
 tic,[I1_r,I2_r,I1_rs,I2_rs,I3,I4,t_form,~] = Transformation(image_1,image_2,...
     cor1,cor2,trans_form,out_form,1,Is_flag,I3_flag,I4_flag);
     t(6)=toc; fprintf(['*已完成图像变换，用时 ',num2str(t(6)),'s\n']);
@@ -100,7 +100,7 @@ tic,[I1_r,I2_r,I1_rs,I2_rs,I3,I4,t_form,~] = Transformation(image_1,image_2,...
 T=num2str(sum(t)); fprintf(['已完成图像配准，总用时',T,'s\n']);
                    fprintf([' Done image registration, total time: ',T,'s\n\n']);
 
-%% Save Results
+%% Save results
 Date = datestr(now,'yyyy-mm-dd_HH-MM-SS__'); tic
 cors = {cor1;cor2}; Imwrite(cors,['.\save_image\',Date,'0 corresponds.mat']);
 if exist('matchment') && ~isempty(matchment) && isvalid(matchment)
