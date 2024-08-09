@@ -30,3 +30,5 @@ Multi-source images registration examples:
 ![image](example3.jpg)
 
 ![image](example4.jpg)
+
+![image](example5.jpg)
