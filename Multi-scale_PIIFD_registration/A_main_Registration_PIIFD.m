@@ -13,9 +13,9 @@ addpath('functions')
 %% Is there any obvious intensity difference (multi-modal)
 int_flag = 1; % yes:1, no:0
 %% Is there any obvious rotation difference
-rot_flag = 0;
+rot_flag = 1;
 %% Is there any obvious scale difference
-scl_flag = 0;
+scl_flag = 1;
 %% What spatial transformation model do you need at the end
 trans_form = 'affine';  % similarity, affine, projective
 %% What image pair output form do you need at the end
@@ -33,7 +33,7 @@ G_sigma   = 1.6;  % 高斯金字塔模糊步长，默认:1.6;  Gaussian pyramid 
 nLayers   = 4;    % 高斯金字塔每组层数，默认:4;  Number of layers per group in the Gaussian pyramid, default: 4
 thresh    = 50;   % Harris特征点响应判别阈值，默认:50;  Harris response threshold, default: 50 (Could be set to 0)
 radius    = 2;    % Harris局部非极大值抑制窗半径，默认:2;  Harris LNMS window radius, default: 2
-Npoint    = 5000; % 特征点数量择优阈值，默认:2000/5000;  Feature point number threshold, default: 2000/5000
+Npoint    = 2000; % 特征点数量择优阈值，默认:2000/5000;  Feature point number threshold, default: 2000/5000
 patchsize = 40;   % 描述符Patchsize，默认:40;  Descriptor patchsize, default: 40
 NBS       = 4;    % 描述符方格划分数，默认:4;  Descriptor grids division number, default: 4
 NBO       = 8;    % 描述符角度划分数，默认:8;  Descriptor angle division number, default: 8
