@@ -46,6 +46,7 @@ If you find our work useful in your research, please consider citing:
   pages={113--124},
   year={2021}
 }
+
 @inproceedings{gao2021multi,
   title={Multi-scale {HARRIS-PIIFD} features for registration of visible and infrared images},
   author={Gao, Chenzhong and Li, Wei},
