@@ -32,3 +32,25 @@ Multi-source images registration examples:
 ![image](example4.jpg)
 
 ![image](example5.jpg)
+
+
+## 📚 Citation
+If you find our work useful in your research, please consider citing:
+```bibtex
+@article{gao2021multi,
+  title={Multi-Scale {PIIFD} for Registration of Multi-Source Remote Sensing Images},
+  author={Gao, Chenzhong and Li, Wei},
+  journal={Journal of Beijing Institute of Technology},
+  volume={30},
+  number={2},
+  pages={113--124},
+  year={2021}
+}
+@inproceedings{gao2021multi,
+  title={Multi-scale {HARRIS-PIIFD} features for registration of visible and infrared images},
+  author={Gao, Chenzhong and Li, Wei},
+  booktitle={2021 IEEE International Geoscience and Remote Sensing Symposium IGARSS},
+  pages={5437--5440},
+  year={2021},
+  organization={IEEE}
+}
