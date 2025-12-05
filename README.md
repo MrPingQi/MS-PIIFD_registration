@@ -49,7 +49,7 @@ If you find our work useful in your research, please consider citing:
 ```
 ```bibtex
 @inproceedings{gao2021multi,
-  title={Multi-scale {HARRIS-PIIFD} features for registration of visible and infrared images},
+  title={Multi-scale {Harris-PIIFD} features for registration of visible and infrared images},
   author={Gao, Chenzhong and Li, Wei},
   booktitle={2021 IEEE International Geoscience and Remote Sensing Symposium IGARSS},
   pages={5437--5440},
