@@ -1,8 +1,8 @@
 # MS-PIIFD_registration
-Code for the paper “Multi-scale PIIFD for registration of multi-source remote sensing images” [Online]. Available: http://journal.bit.edu.cn/jbit/en/article/doi/10.15918/j.jbit1004-0579.2021.016. and “Multi-Scale HARRIS-PIIFD Features for Registration of Visible and Infrared Images” [Online]. Available: https://ieeexplore.ieee.org/document/9555105.
+Paper Link: http://journal.bit.edu.cn/jbit/en/article/doi/10.15918/j.jbit1004-0579.2021.016 and https://ieeexplore.ieee.org/document/9555105
 
 If you have any queries or suggestions, please do not hesitate to contact me (gao-pingqi@qq.com).
-If you are from China, just speak Chinese, its OK~  中国人直接说中文就可以了~
+If you are from China, you may just speak Chinese~  中国人直接说中文就可以了~
 
 Run this code by the following procedures:
 
@@ -22,6 +22,7 @@ Testing data are available:
 ** Now this registration algorithm is an old-fashioned one, and we highly recommend checking our new method: MS-HLMO, which is now available at https://github.com/MrPingQi/MS_HLMO_registration.
 
 
+## 📈 Matching Performance 
 Multi-source images registration examples:
 ![image](example1.jpg)
 
