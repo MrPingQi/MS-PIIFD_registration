@@ -1,4 +1,4 @@
-# MS-PIIFD_registration
+# MS-PIIFD: Multi-Scale PIIFD for Registration of Multi-Source Remote Sensing Images
 Paper Link: http://journal.bit.edu.cn/jbit/en/article/doi/10.15918/j.jbit1004-0579.2021.016 and https://ieeexplore.ieee.org/document/9555105
 
 If you have any queries or suggestions, please do not hesitate to contact me (gao-pingqi@qq.com).
