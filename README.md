@@ -21,6 +21,7 @@ Testing data are available:
 
 ** Now this registration algorithm is an old-fashioned one, and we highly recommend checking our new method: MS-HLMO, which is now available at https://github.com/MrPingQi/MS_HLMO_registration.
 
+<br>
 
 ## 📈 Matching Performance
 Multi-source images registration examples:
@@ -34,6 +35,7 @@ Multi-source images registration examples:
 
 ![image](misc/example5.jpg)
 
+<br>
 
 ## 📚 Citation
 If you find our work useful in your research, please consider citing:
